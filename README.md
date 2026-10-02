@@ -1,5 +1,8 @@
 billboard.py
 ============
+**This project is forked**, so this README combines both our instructions and readme/license of original project. Go to **Quickstart [Our project]** section for our instruction
+
+
 
 **billboard.py** is a Python API for accessing music charts from [Billboard.com](http://www.billboard.com/charts/).
 
@@ -14,7 +17,26 @@ pip install billboard.py
 
 Or clone this repo and run `python setup.py install`.
 
-Quickstart
+Quickstart [Our project]
+----------
++ Clone this repository with 
+```
+git clone https://github.com/georgerieh/data-collection-class-project.git
+cd data-collection-class-project
+pip install billboard.py
+```
+
++ Download [pgadmin4](https://www.pgadmin.org/download/) to perform a simple ETL process
++ Go to [PostgreSQL ETL Script]('Common_File_MusicBrainz.sql') for initial instructions and download the dataset, then perform the transformation.
++ Run command to get example csv of chart data
+``` 
+python Billboard-chart-retrieval-example.py
+```
+
+Below is original Readme of the project
+---------
+
+Quickstart [from Billboard]
 ----------
 
 To download a *Billboard* chart, we use the `ChartData()` constructor.
