@@ -374,27 +374,36 @@ class ChartData:
 
             def getMeta(attribute, which_li, ifNoValue=None):
                 try:
-                    selected = entrySoup.select_one("ul").select("li")[which_li]
+                    spans = [span.text.strip() for span in entrySoup.select("ul span") if span.text.strip()]
 
-                    if not selected:
-                        return ifNoValue
+                    for i, token in enumerate(spans):
+                        if token.upper() == attribute.upper():
+                            if i + 1 < len(spans):
+                                val_str = spans[i + 1]
+                                if val_str == "-":
+                                    return ifNoValue
+                                return int(val_str)
 
-                    value = selected.text.strip()
-                    if value == "-":
-                        return ifNoValue
-                    else:
-                        return int(value)
-                except:
-                    message = "Failed to parse metadata value: %s" % attribute
+                    import re
+                    full_text = entrySoup.select_one("ul").text if entrySoup.select_one("ul") else ""
+                    match = re.search(rf"{re.escape(attribute)}\s*(\d+|-)", full_text, re.IGNORECASE)
+                    if match:
+                        val = match.group(1)
+                        return ifNoValue if val == "-" else int(val)
+
+                    return ifNoValue
+
+                except Exception:
+                    message = f"Failed to parse metadata value: {attribute}"
                     raise BillboardParseException(message)
 
             # Some pages do not show an award column in their chart data.
             # If missing, this changes the column number offsets.
             awardColumnOffset = 0 if self._pageHasAwardColumn(soup) else -1
             if self.date:
-                peakPos = getMeta("peak", 4 + awardColumnOffset)
-                lastPos = getMeta("last", 3 + awardColumnOffset, ifNoValue=0)
-                weeks = getMeta("week", 5 + awardColumnOffset, ifNoValue=1)
+                peakPos = getMeta("PEAK", 1, ifNoValue=0)
+                lastPos = getMeta("LW", 0, ifNoValue=0)
+                weeks = getMeta("WEEKS ON CHART", 2, ifNoValue=0)
                 isNew = True if weeks == 1 else False
             else:
                 peakPos = lastPos = weeks = None
