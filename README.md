@@ -1,6 +1,6 @@
 billboard.py
 ============
-**This project is forked**, so this README combines both our instructions and readme/license of original project. Go to **Quickstart [Our project]** section for our instruction
+**This project is forked**, so this README combines both our instructions and readme/license of original project. Go to **Quickstart Data Aquisition [Our project]** section for our instruction
 
 
 
@@ -17,7 +17,7 @@ pip install billboard.py
 
 Or clone this repo and run `python setup.py install`.
 
-Quickstart [Our project]
+Quickstart Data Aquisition [Our project]
 ----------
 + Clone this repository with 
 ```
@@ -27,7 +27,7 @@ pip install billboard.py
 ```
 
 + Download [pgadmin4](https://www.pgadmin.org/download/) to perform a simple ETL process
-+ Go to [PostgreSQL ETL Script]('Common_File_MusicBrainz.sql') for initial instructions and download the dataset, then perform the transformation.
++ Go to [PostgreSQL ETL Script](Common_File_MusicBrainz.sql) for initial instructions and download the dataset, then perform the transformation.
 + Run command to get example csv of chart data
 ``` 
 python Billboard-chart-retrieval-example.py
